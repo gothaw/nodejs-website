@@ -18,15 +18,15 @@ const route = (request, response, cityName) => {
         forecast.on('end', forecastJSON => {
             const values = {
                 name: forecastJSON.location.name,
-                country: forecastJSON.location.country
-                // temperature: forecastJSON.current.temp_c,
+                // country: forecastJSON.location.country
+                temperature: forecastJSON.current.temp_c,
                 // humidity: forecastJSON.current.humidity,
                 // wind: forecastJSON.current.wind_kph,
                 // condition: forecastJSON.current.condition.text
             };
 
             // simple response
-            renderer.view('profile', values, response);
+            renderer.view('forecast', values, response);
             renderer.view('footer', {}, response);
             response.end();
         });
