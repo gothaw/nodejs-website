@@ -1,10 +1,20 @@
-const http = require('http');
+const express = require('express');
 
-const router = require('./core/router');
+const homeRoute = require('./api-routes/home');
+const forecastRoute = require('./api-routes/forecast');
 
-const server = http.createServer((request, response) => {
-    router.home(request, response);
-    router.forecast(request, response);
+const app = express();
+
+app.get('/', (request, response) => {
+    homeRoute.route(request, response);
 });
 
-server.listen(8080);
+app.post('/', (request, response) => {
+    homeRoute.route(request, response);
+});
+
+app.get('/:city', (request, response) => {
+    forecastRoute.route(request, response);
+});
+
+app.listen(8080);

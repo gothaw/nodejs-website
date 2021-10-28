@@ -4,12 +4,12 @@ const constants = require('../config/constants');
 const renderer = require('../core/renderer');
 const Forecast = require('../services/forecast');
 
-const {COMMON_HEADERS, HTTP} = constants;
+const {COMMON_HEADERS} = constants;
 
-const route = (request, response, cityName) => {
-    const method = request.method.toLowerCase();
+const route = (request, response) => {
+    const cityName = request.url.replace('/', '');
 
-    if (method === HTTP.GET) {
+    if (cityName.length > 0) {
         response.writeHead(200, COMMON_HEADERS);
         renderer.view('header', {}, response);
 
