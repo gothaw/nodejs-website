@@ -16,7 +16,7 @@ const handleGetRequest = response => {
 const handlePostRequest = (request, response) => {
     request.on('data', postBody => {
         const query = querystring.parse(postBody.toString());
-        response.writeHead(303, {'Location': `/${query.cityName}`});
+        response.writeHead(303, {'Location': `/${query.cityName.toLowerCase()}`});
         response.end();
     })
 };

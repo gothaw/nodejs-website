@@ -1,7 +1,3 @@
-const querystring = require('querystring');
-
-const Forecast = require('./profile');
-const renderer = require('./renderer');
 const homeRoute = require('../api-routes/home');
 const forecastRoute = require('../api-routes/forecast');
 

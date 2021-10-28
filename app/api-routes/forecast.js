@@ -7,7 +7,7 @@ const Forecast = require('../services/forecast');
 const {COMMON_HEADERS, HTTP} = constants;
 
 const route = (request, response, cityName) => {
-    const method = request.message.toLowerCase();
+    const method = request.method.toLowerCase();
 
     if (method === HTTP.GET) {
         response.writeHead(200, COMMON_HEADERS);
@@ -22,6 +22,7 @@ const route = (request, response, cityName) => {
                 temperature: forecastJSON.current.temp_c,
                 // humidity: forecastJSON.current.humidity,
                 // wind: forecastJSON.current.wind_kph,
+                image: '../views/city.png'
                 // condition: forecastJSON.current.condition.text
             };
 
