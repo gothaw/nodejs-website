@@ -40,6 +40,11 @@ const _module = {
     ]
 };
 
+const output = {
+    filename: 'bundle.js',
+    path: __dirname + '/dist/'
+};
+
 const plugins = [
     new FixStyleOnlyEntriesPlugin(),
     new MiniCssExtractPlugin({
@@ -59,5 +64,6 @@ module.exports = {
     entry,
     mode,
     module: _module,
+    output,
     plugins
 };

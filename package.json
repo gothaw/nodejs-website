@@ -4,10 +4,9 @@
   "description": "simple node.js website",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "sync": "browser-sync start --directory --server --files '*.js, *.html, *.css'",
-    "wp:dev": "webpack --mode development --progress --watch",
-    "wp:prod": "webpack --mode production"
+    "wp:dev": "webpack --mode development --progress --watch && rimraf dist",
+    "wp:prod": "webpack --mode production && rimraf dist"
   },
   "repository": {
     "type": "git",
@@ -22,6 +21,7 @@
   "devDependencies": {
     "autoprefixer": "^10.4.0",
     "browser-sync": "^2.27.7",
+    "concurrently": "^6.3.0",
     "css-loader": "^6.5.0",
     "mini-css-extract-plugin": "^2.4.3",
     "node-sass": "^6.0.1",
