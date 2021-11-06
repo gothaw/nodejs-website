@@ -1,6 +1,6 @@
 //============================================= Imports ==================================================
 @import url(http://fonts.googleapis.com/css?family=Varela+Round);
-@import 'partials/_normalize';
+@import 'partials/reset';
 @import 'partials/_utilities';
 
 //========================================== Main Styling ================================================
@@ -31,6 +31,7 @@ li {
 a, a:visited {
   color: $light-blue;
   text-decoration: none;
+  cursor: pointer;
 }
 
 span {
@@ -60,12 +61,18 @@ input {
 
 .city-name {
   font-size: 24px;
+  padding: 20px 0;
+}
+
+.country, .local-time {
+  padding-bottom: 15px;
 }
 
 .button {
   border-color: $light-blue;
   background: $light-blue;
   color: $white;
+  cursor: pointer;
 }
 
 .error {
