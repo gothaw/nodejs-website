@@ -3,9 +3,15 @@
     <img src="./dist/img/city.png" width="250" height="250" alt="city" class="city-image">
 
     <p class="city-name"><span>{{name}}</span></p>
+    <p class="country">Country: <span>{{country}}</span></p>
+    <p class="local-time">Local Time: <span>{{localTime}}</span></p>
 
     <ul>
-        <li>Temperature: <span>{{temperature}}</span>C</li>
+        <li>Weather: <span>{{condition}}</span></li>
+        <li>Temperature: <span>{{temperature}}</span>&deg;C</li>
+        <li>Humidity: <span>{{humidity}}</span>%</li>
+        <li>Pressure: <span>{{pressure}}</span> mb</li>
+        <li>Wind: <span>{{wind}}</span> km/h</li>
         <li><a href="/">Search Again</a></li>
     </ul>
 

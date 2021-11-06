@@ -1,11 +1,17 @@
-const querystring = require('querystring');
-
 const constants = require('../config/constants');
 const renderer = require('../core/renderer');
-const Forecast = require('../services/forecast');
+const Forecast = require('../services/Forecast');
 
 const {COMMON_HEADERS} = constants;
 
+/**
+ * Handles weather forecast GET request for /cityName route.
+ * It creates a Forecast object based on the cityName and then uses the values received from the API in the HTML templates.
+ * Finally, it writes HTML files to the response.
+ * If the cityName was not found in the API it shows a toast error.
+ * @param request {Object} GET request
+ * @param response {Object} server response
+ */
 const route = (request, response) => {
     const cityName = request.url.replace('/', '');
 
@@ -16,17 +22,19 @@ const route = (request, response) => {
         const forecast = new Forecast(cityName);
 
         forecast.on('end', forecastJSON => {
+            const {current, location} = forecastJSON;
+
             const values = {
-                name: forecastJSON.location.name,
-                // country: forecastJSON.location.country
-                temperature: forecastJSON.current.temp_c,
-                // humidity: forecastJSON.current.humidity,
-                // wind: forecastJSON.current.wind_kph,
-                image: '../views/city.png'
-                // condition: forecastJSON.current.condition.text
+                name: location?.name,
+                country: location?.country,
+                localTime: location?.localtime?.split(' ')[1],
+                condition: current?.condition.text,
+                temperature: current?.temp_c,
+                humidity: current?.humidity,
+                pressure: current?.pressure_mb,
+                wind: current?.wind_kph
             };
 
-            // simple response
             renderer.view('forecast', values, response);
             renderer.view('footer', {}, response);
             response.end();

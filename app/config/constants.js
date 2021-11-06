@@ -1,4 +1,5 @@
 const COMMON_HEADERS = {'Content-Type': 'text/html'};
+
 const HTTP = {
     GET: 'get',
     POST: 'post'

@@ -1,4 +1,4 @@
-const Forecast = require('./forecast.js');
+const Forecast = require('./Forecast.js');
 
 const forecast = new Forecast('London');
 

@@ -5,6 +5,11 @@ const renderer = require('../core/renderer');
 
 const {COMMON_HEADERS, HTTP} = constants;
 
+/**
+ * Handles GET request on the search page which is accessed via '/' route.
+ * It serves relevant HTML files.
+ * @param response {Object} server response
+ */
 const handleGetRequest = response => {
     response.writeHead(200, COMMON_HEADERS);
     renderer.view('header', {}, response);
@@ -13,6 +18,11 @@ const handleGetRequest = response => {
     response.end();
 };
 
+/**
+ * Handles POST request when submitting search form. It redirects to /cityName route.
+ * @param request {Object} POST request
+ * @param response {Object} server response
+ */
 const handlePostRequest = (request, response) => {
     request.on('data', postBody => {
         const query = querystring.parse(postBody.toString());
@@ -21,6 +31,11 @@ const handlePostRequest = (request, response) => {
     })
 };
 
+/**
+ * Handles routes on home page. Depending on the method it uses handleGetRequest or handlePostRequest.
+ * @param request {Object} GET or POST request
+ * @param response {Object} server response
+ */
 const route = (request, response) => {
     const method = request.method.toLowerCase();
 
