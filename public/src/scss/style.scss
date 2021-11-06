@@ -29,7 +29,7 @@ li {
 }
 
 a, a:visited {
-  color: #5FB6E1;
+  color: $light-blue;
   text-decoration: none;
 }
 
@@ -45,7 +45,7 @@ input {
   text-align: center;
   width: 360px;
   border-radius: 4px;
-  border: 1px solid $input-border-color;
+  border: 1px solid $light-grey;
   color: $input-text-color;
 }
 
@@ -63,25 +63,25 @@ input {
 }
 
 .button {
-  border-color: #5FB6E1;
-  background: #5FB6E1;
-  color: #fff;
+  border-color: $light-blue;
+  background: $light-blue;
+  color: $white;
 }
 
 .error {
   width: 100%;
   padding: 22px 0;
-  background: #ff4747;
-  color: #b90000;
+  background: $error-background-color;
+  color: $error-text-color;
   position: absolute;
   left: 0;
   top: 0;
 }
 
 .forecast {
-  background: #fff;
+  background: $white;
   border-radius: 4px;
-  border: 1px solid #D5DDE4;
+  border: 1px solid $light-grey;
   padding: 40px 0 0;
   margin: -40px 0 0;
 }
