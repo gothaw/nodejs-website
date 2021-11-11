@@ -14,11 +14,12 @@ class Forecast extends Request {
      * @param cityName {String} name of the city to be look
      */
     constructor(cityName) {
-        const url = `https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${cityName}&aqi=no`;
-        const errorMessage = `There was an error getting forecast for ${cityName}`;
-        super(url, errorMessage);
-
-        this.on('end', data => this.emit(data));
+        super();
+        // const url = `https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${cityName}&aqi=no`;
+        // const errorMessage = `There was an error getting forecast for ${cityName}`;
+        console.log('constructor');
+        // super();
+        this.makeRequest(`https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${cityName}&aqi=no`, `There was an error getting forecast for ${cityName}`);
     }
 
     /**

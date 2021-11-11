@@ -4,11 +4,10 @@ const EventEmitter = require('events');
 
 class Request extends EventEmitter {
 
-    constructor(url, failedRequestErrorMessage) {
-        super();
-
+     makeRequest(url, failedRequestErrorMessage) {
         const request = https.get(url, response => {
             this._data = '';
+            console.log('called request');
 
             if (response.statusCode !== 200) {
                 request.destroy();
