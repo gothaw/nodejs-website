@@ -1,33 +1,30 @@
-const Request = require('Request');
+const Request = require('./Request.js');
 
 const api = require('../config/api.json');
 const API_KEY = api.WEATHER_API_KEY;
+const { WEATHER_API_CURRENT_FORECAST_URL } = require('../config/constants');
 
 /**
- * Model for weather forecast. It takes weather forecast from https://www.weatherapi.com using the API_KEY stored in api.json config.
+ * Model for weather forecast. It gets weather forecast from https://www.weatherapi.com using the API_KEY stored in api.json config.
  */
 class Forecast extends Request {
 
     /**
      * Constructor for weather forecast object. It takes city name and makes a request to API.
-     * It uses https get method and parses the data to JSON object when data is received.
-     * @param cityName {String} name of the city to be look
+     * It uses Request class to make a request.
+     * @param cityName {String} name of the city to be look up
      */
     constructor(cityName) {
-        super();
-        // const url = `https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${cityName}&aqi=no`;
-        // const errorMessage = `There was an error getting forecast for ${cityName}`;
-        console.log('constructor');
-        // super();
-        this.makeRequest(`https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${cityName}&aqi=no`, `There was an error getting forecast for ${cityName}`);
+        super(`${WEATHER_API_CURRENT_FORECAST_URL}?key=${API_KEY}&q=${cityName}&aqi=no`, `There was an error getting forecast for ${cityName}`);
+        this._city = cityName;
     }
 
     /**
-     * Getter for the forecast data
+     * Getter for the city name.
      * @returns {String}
      */
-    get data() {
-        return this._data;
+    get city() {
+        return this._city;
     }
 }
 

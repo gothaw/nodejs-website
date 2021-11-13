@@ -3,7 +3,7 @@ const CityImage = require('./CityImage.js');
 const cityImage = new CityImage('London');
 
 /**
- * To test run: node example_forecast.js
+ * To test run: node example_city_image.js
  */
 
 /**
@@ -11,7 +11,9 @@ const cityImage = new CityImage('London');
  * the 'end' event is triggered and the full body
  * is given to the handler or callback
  **/
-cityImage.on('end', console.dir);
+cityImage.on('end', () => {
+    console.dir(cityImage.data);
+});
 
 /**
  * If a parsing, network or HTTP error occurs an

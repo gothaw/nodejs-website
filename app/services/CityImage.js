@@ -1,40 +1,31 @@
-const http = require('http');
-const https = require('https');
-const EventEmitter = require('events');
+const Request = require('./Request.js');
 
 const api = require('../config/api.json');
-const API_KEY = api.WEATHER_API_KEY;
+const API_KEY = api.PLACES_API_KEY;
+const {GOOGLE_PLACES_API_URL} = require('../config/constants');
 
-class CityImage extends EventEmitter {
+/**
+ * Model for the City Image. It gets a image in Google Places API using the API_KEY stored in api.json config.
+ */
+class CityImage extends Request {
 
+    /**
+     * Constructor for city image object. It takes city name and makes a request to API.
+     * It uses Request class to make a request.
+     * @param cityName {String} name of the city to be look up
+     */
     constructor(cityName) {
-        super();
+        super(`${GOOGLE_PLACES_API_URL}?input=${cityName}&key=${API_KEY}&inputtype=textquery&fields=name,photos`, `There was an error getting city image for ${cityName}`);
+        this._city = cityName;
+    }
 
-        const request = https.get(`https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${cityName}&key=${API_KEY}&inputtype=textquery&fields=name,photos`,
-            response => {
-                this._data = '';
-
-                if (response.statusCode !== 200) {
-                    request.destroy();
-                    this.emit('error', new Error(`There was an error getting city image for ${cityName}: (${http.STATUS_CODES[response.statusCode]})`))
-                }
-
-                response.on('data', data => {
-                    this._data += data.toString();
-                    this.emit('data', data);
-                });
-
-                response.on('end', () => {
-                    if (response.statusCode === 200) {
-                        try {
-                            // Parse data
-                            const forecast = JSON.parse(this._data);
-                            this.emit('end', forecast)
-                        } catch (error) {
-                            this.emit('error', error)
-                        }
-                    }
-                });
-            }).on('error', error => this.emit('error', error));
+    /**
+     * Getter for the city name.
+     * @returns {String}
+     */
+    get city() {
+        return this._city;
     }
 }
+
+module.exports = CityImage;
