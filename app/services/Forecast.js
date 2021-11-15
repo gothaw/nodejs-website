@@ -2,7 +2,7 @@ const Request = require('./Request.js');
 
 const api = require('../config/api.json');
 const API_KEY = api.WEATHER_API_KEY;
-const { WEATHER_API_CURRENT_FORECAST_URL } = require('../config/constants');
+const { URLS } = require('../config/constants');
 
 /**
  * Model for weather forecast. It gets weather forecast from https://www.weatherapi.com using the API_KEY stored in api.json config.
@@ -15,7 +15,7 @@ class Forecast extends Request {
      * @param cityName {String} name of the city to be look up
      */
     constructor(cityName) {
-        super(`${WEATHER_API_CURRENT_FORECAST_URL}?key=${API_KEY}&q=${cityName}&aqi=no`, `There was an error getting forecast for ${cityName}`);
+        super(`${URLS.WEATHER_API_CURRENT_FORECAST}?key=${API_KEY}&q=${cityName}&aqi=no`, `There was an error getting forecast for ${cityName}`);
         this._city = cityName;
     }
 

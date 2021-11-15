@@ -2,7 +2,7 @@ const http = require('http');
 const https = require('https');
 const EventEmitter = require('events');
 
-const { DEFAULT_REQUEST_ERROR_MESSAGE } = require('../config/constants');
+const { MESSAGES } = require('../config/constants');
 
 /**
  * Class used for making a request with a given url.
@@ -16,7 +16,7 @@ class Request extends EventEmitter {
      * @param url {String} url to make a request to
      * @param failedRequestErrorMessage {String} message when requests fails
      */
-    constructor(url, failedRequestErrorMessage = DEFAULT_REQUEST_ERROR_MESSAGE) {
+    constructor(url, failedRequestErrorMessage = MESSAGES.DEFAULT_REQUEST_ERROR_MESSAGE) {
         super();
 
         const request = https.get(url, response => {

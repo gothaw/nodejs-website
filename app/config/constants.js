@@ -5,14 +5,20 @@ const HTTP = {
     POST: 'post'
 };
 
-const DEFAULT_REQUEST_ERROR_MESSAGE = 'There was en error making a request';
-const WEATHER_API_CURRENT_FORECAST_URL = 'https://api.weatherapi.com/v1/current.json';
-const GOOGLE_PLACES_API_URL = 'https://maps.googleapis.com/maps/api/place/findplacefromtext/json';
+const MESSAGES = {
+    DEFAULT_REQUEST_ERROR_MESSAGE: 'There was en error making a request'
+}
+
+const URLS = {
+    WEATHER_API_CURRENT_FORECAST : 'https://api.weatherapi.com/v1/current.json',
+    GOOGLE_PLACES_FIND_PLACE : 'https://maps.googleapis.com/maps/api/place/findplacefromtext/json',
+    GOOGLE_PLACES_PHOTO : 'https://maps.googleapis.com/maps/api/place/photo'
+}
+
 
 module.exports = {
     COMMON_HEADERS,
-    DEFAULT_REQUEST_ERROR_MESSAGE,
-    WEATHER_API_CURRENT_FORECAST_URL,
-    GOOGLE_PLACES_API_URL,
+    MESSAGES,
+    URLS,
     HTTP
 }
