@@ -11,7 +11,9 @@ const cityImage = new CityImage('London');
  * the 'end' event is triggered and the full body
  * is given to the handler or callback
  **/
-cityImage.on('end', data => {console.dir(data?.candidates[0].photos)});
+cityImage.on('end', data => {
+    console.dir(data?.candidates[0].photos)
+});
 
 /**
  * If a parsing, network or HTTP error occurs an

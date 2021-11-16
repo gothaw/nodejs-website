@@ -2,7 +2,7 @@ const http = require('http');
 const https = require('https');
 const EventEmitter = require('events');
 
-const { MESSAGES } = require('../config/constants');
+const {MESSAGES} = require('../config/constants');
 
 /**
  * Class used for making a request with a given url.
@@ -22,7 +22,8 @@ class Request extends EventEmitter {
         const request = https.get(url, response => {
             this._data = '';
 
-            if (response.statusCode !== 200) {
+            console.log(response.statusCode);
+            if (response.statusCode !== 200 && response.statusCode !== 302) {
                 request.destroy();
                 this.emit('error', new Error(`${failedRequestErrorMessage}: (${http.STATUS_CODES[response.statusCode]})`))
             }
@@ -33,13 +34,14 @@ class Request extends EventEmitter {
             });
 
             response.on('end', () => {
-                if (response.statusCode === 200) {
+                if (response.statusCode === 200 || response.statusCode === 302) {
                     try {
                         // Parse data
+                        console.log(this._data.toString());
                         const data = JSON.parse(this._data);
-                        this.emit('end', data)
+                        this.emit('end', data);
                     } catch (error) {
-                        this.emit('error', error)
+                        this.emit('error', error);
                     }
                 }
             });

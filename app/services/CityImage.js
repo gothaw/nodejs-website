@@ -3,7 +3,7 @@ const EventEmitter = require('events');
 
 const api = require('../config/api.json');
 const API_KEY = api.PLACES_API_KEY;
-const { URLS } = require('../config/constants');
+const {URLS} = require('../config/constants');
 const http = require('http');
 
 /**
@@ -19,6 +19,7 @@ class CityImage extends EventEmitter {
     constructor(cityName) {
         super();
         const failedRequestMessage = `There was an error getting city image for ${cityName}`;
+
         const photoReferenceResponse = new Request(`${URLS.GOOGLE_PLACES_FIND_PLACE}?input=${cityName}&key=${API_KEY}&inputtype=textquery&fields=name,photos`, failedRequestMessage);
         photoReferenceResponse.on('end', response => {
 
@@ -27,9 +28,15 @@ class CityImage extends EventEmitter {
             if (!photoReference) {
                 this.emit('error', new Error('No photo found!'))
             }
+            console.log(photoReference);
 
-            const cityImage = new Request(`${URLS.GOOGLE_PLACES_PHOTO}?photoreference=${photoReference}&key=${API_KEY}&maxwidth=400&maxheight=400`);
-            cityImage.on('end', () => {console.log('hey')})
+            const cityImage = new Request(`${URLS.GOOGLE_PLACES_PHOTO}?photoreference=${photoReference}&key=${API_KEY}&maxwidth=400&maxheight=400`, failedRequestMessage);
+            cityImage.on('end', () => {
+                console.log('data')
+            });
+            cityImage.on('error', (error) => {
+                console.log(error)
+            });
         });
         photoReferenceResponse.on('error', error => this.emit('error', error));
     }
