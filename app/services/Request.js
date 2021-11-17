@@ -2,7 +2,7 @@ const http = require('http');
 const https = require('https');
 const EventEmitter = require('events');
 
-const {MESSAGES} = require('../config/constants');
+const {MESSAGES, REDIRECT_RESPONSES} = require('../config/constants');
 
 /**
  * Class used for making a request with a given url.
@@ -15,15 +15,17 @@ class Request extends EventEmitter {
      * If request fails it throws an error with failedRequestErrorMessage and with the response status code.
      * @param url {String} url to make a request to
      * @param failedRequestErrorMessage {String} message when requests fails
+     * @param handleRedirects {Boolean} allows for accepting 301, 302 and 308 responses
+     * @param shouldParseToJSON {Boolean} boolean switch for parsing received data to JSON
      */
-    constructor(url, failedRequestErrorMessage = MESSAGES.DEFAULT_REQUEST_ERROR_MESSAGE) {
+    constructor(url, failedRequestErrorMessage = MESSAGES.DEFAULT_REQUEST_ERROR_MESSAGE, handleRedirects = false, shouldParseToJSON = true) {
         super();
 
         const request = https.get(url, response => {
             this._data = '';
+            const isRedirect = REDIRECT_RESPONSES.includes(response.statusCode);
 
-            console.log(response.statusCode);
-            if (response.statusCode !== 200 && response.statusCode !== 302) {
+            if (response.statusCode !== 200 && (handleRedirects && !isRedirect)) {
                 request.destroy();
                 this.emit('error', new Error(`${failedRequestErrorMessage}: (${http.STATUS_CODES[response.statusCode]})`))
             }
@@ -34,14 +36,18 @@ class Request extends EventEmitter {
             });
 
             response.on('end', () => {
-                if (response.statusCode === 200 || response.statusCode === 302) {
-                    try {
-                        // Parse data
-                        console.log(this._data.toString());
-                        const data = JSON.parse(this._data);
-                        this.emit('end', data);
-                    } catch (error) {
-                        this.emit('error', error);
+                if (response.statusCode === 200 || (handleRedirects && isRedirect)) {
+
+                    if (shouldParseToJSON) {
+                        try {
+                            // Parse data
+                            const data = JSON.parse(this._data);
+                            this.emit('end', data);
+                        } catch (error) {
+                            this.emit('error', error);
+                        }
+                    } else {
+                        this.emit('end', this._data);
                     }
                 }
             });

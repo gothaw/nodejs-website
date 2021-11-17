@@ -3,8 +3,7 @@ const EventEmitter = require('events');
 
 const api = require('../config/api.json');
 const API_KEY = api.PLACES_API_KEY;
-const {URLS} = require('../config/constants');
-const http = require('http');
+const {URLS, MESSAGES} = require('../config/constants');
 
 /**
  * Model for the City Image. It gets a image in Google Places API using the API_KEY stored in api.json config.
@@ -26,17 +25,23 @@ class CityImage extends EventEmitter {
             const photoReference = response?.candidates[0]?.photos[0]?.photo_reference;
 
             if (!photoReference) {
-                this.emit('error', new Error('No photo found!'))
+                this.emit('error', new Error(MESSAGES.NO_IMAGE_FOUND))
             }
-            console.log(photoReference);
 
-            const cityImage = new Request(`${URLS.GOOGLE_PLACES_PHOTO}?photoreference=${photoReference}&key=${API_KEY}&maxwidth=400&maxheight=400`, failedRequestMessage);
-            cityImage.on('end', () => {
-                console.log('data')
+            const cityImage = new Request(`${URLS.GOOGLE_PLACES_PHOTO}?photoreference=${photoReference}&key=${API_KEY}&maxwidth=400&maxheight=400`, failedRequestMessage, true, false);
+            cityImage.on('end', (data) => {
+                // regex to find the url
+                const regex = /(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[-A-Z0-9+&@#\/%=~_|$?!:,.])*(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[A-Z0-9+&@#\/%=~_|$])/igm;
+                const imageUrls = data.match(regex);
+
+                if (imageUrls.length) {
+                    // emitting first image that is found
+                    this.emit('end', imageUrls[0]);
+                } else {
+                    this.emit('error', new Error(MESSAGES.NO_IMAGE_FOUND));
+                }
             });
-            cityImage.on('error', (error) => {
-                console.log(error)
-            });
+            cityImage.on('error', error => this.emit('error', error));
         });
         photoReferenceResponse.on('error', error => this.emit('error', error));
     }

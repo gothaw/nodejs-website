@@ -5,8 +5,11 @@ const HTTP = {
     POST: 'post'
 };
 
+const REDIRECT_RESPONSES = [301, 302, 308];
+
 const MESSAGES = {
-    DEFAULT_REQUEST_ERROR_MESSAGE: 'There was en error making a request'
+    DEFAULT_REQUEST_ERROR_MESSAGE: 'There was en error making a request',
+    NO_IMAGE_FOUND: 'No image found'
 }
 
 const URLS = {
@@ -19,6 +22,7 @@ const URLS = {
 module.exports = {
     COMMON_HEADERS,
     MESSAGES,
+    REDIRECT_RESPONSES,
     URLS,
     HTTP
 }
