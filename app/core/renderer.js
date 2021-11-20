@@ -1,4 +1,5 @@
 const fs = require('fs');
+const {ABSOLUTE_PUBLIC_PATH} = require('mini-css-extract-plugin/dist/utils');
 
 /**
  * Function that binds variables in html template. The variables in the template should have format: {{variableName}}
@@ -23,7 +24,7 @@ const bindValues = (values, content) => {
  */
 const view = (name, values, response) => {
     // Read from the template file
-    const fileContents = fs.readFileSync(`./views/${name}.html`, {encoding: 'utf8'});
+    const fileContents = fs.readFileSync(`./app/views/${name}.html`, {encoding: 'utf8'});
     // Insert values in to the content
     const mergedContent = bindValues(values, fileContents);
     // Write out the contents to the response
