@@ -1,8 +1,8 @@
 const Request = require('./Request.js');
 const EventEmitter = require('events');
 
-const api = require('../config/api.json');
-const API_KEY = api.PLACES_API_KEY;
+// const api = require('../config/api.json');
+const API_KEY = 'api.PLACES_API_KEY';
 const {URLS, MESSAGES} = require('../config/constants');
 
 /**

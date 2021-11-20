@@ -1,7 +1,7 @@
 const Request = require('./Request.js');
 
-const api = require('../config/api.json');
-const API_KEY = api.WEATHER_API_KEY;
+// const api = require('../config/api.json');
+const API_KEY = 'api.WEATHER_API_KEY';
 const {URLS} = require('../config/constants');
 
 /**
