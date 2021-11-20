@@ -1,5 +1,4 @@
 const fs = require('fs');
-const {ABSOLUTE_PUBLIC_PATH} = require('mini-css-extract-plugin/dist/utils');
 
 /**
  * Function that binds variables in html template. The variables in the template should have format: {{variableName}}
