@@ -5,7 +5,7 @@ const forecastRoute = require('./api-routes/forecast');
 
 const app = express();
 
-app.use(express.static(__dirname.replace('app', 'public')));
+app.use(express.static(__dirname.substr(0, __dirname.lastIndexOf('app')) + 'public'));
 console.log('DIRNAME: ' + __dirname);
 
 app.get('/', (request, response) => {
