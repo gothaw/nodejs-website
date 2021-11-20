@@ -2,6 +2,7 @@ const querystring = require('querystring');
 
 const constants = require('../config/constants');
 const renderer = require('../core/renderer');
+const { getStaticDir } = require('../core/helpers');
 
 const {COMMON_HEADERS, HTTP} = constants;
 
@@ -11,8 +12,10 @@ const {COMMON_HEADERS, HTTP} = constants;
  * @param response {Object} server response
  */
 const handleGetRequest = response => {
+    const staticDirectory = getStaticDir();
+
     response.writeHead(200, COMMON_HEADERS);
-    renderer.view('header', {}, response);
+    renderer.view('header', { static: staticDirectory }, response);
     renderer.view('search', {}, response);
     renderer.view('footer', {}, response);
     response.end();
