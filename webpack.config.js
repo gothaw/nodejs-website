@@ -4,7 +4,7 @@ const webpack = require("webpack");
 const autoprefixer = require("autoprefixer");
 const TerserPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+// const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries");
 
 const optimization = {
@@ -47,9 +47,9 @@ const output = {
 
 const plugins = [
     new FixStyleOnlyEntriesPlugin(),
-    new MiniCssExtractPlugin({
-        filename: "../public/dist/css/main.css"
-    }),
+    // new MiniCssExtractPlugin({
+    //     filename: "../public/dist/css/main.css"
+    // }),
     new webpack.LoaderOptionsPlugin({
         options:{
             postcss: [
