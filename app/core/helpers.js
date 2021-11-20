@@ -1,6 +1,6 @@
 const getStaticDir = () => {
     if (process.env.NODE_ENV === 'production') {
-        return './public'
+        return './public/'
     } else {
         return './';
     }
