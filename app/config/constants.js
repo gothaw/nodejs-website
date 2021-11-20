@@ -5,6 +5,11 @@ const HTTP = {
     POST: 'post'
 };
 
+const API = {
+    GOOGLE_PLACES: 'googlePlaces',
+    WEATHER_API: 'weatherAPI'
+}
+
 const REDIRECT_RESPONSES = [301, 302, 308];
 
 const MESSAGES = {
@@ -20,6 +25,7 @@ const URLS = {
 
 
 module.exports = {
+    API,
     COMMON_HEADERS,
     MESSAGES,
     REDIRECT_RESPONSES,

@@ -1,9 +1,10 @@
 const Request = require('./Request.js');
 const EventEmitter = require('events');
 
-// const api = require('../config/api.json');
-const API_KEY = 'api.PLACES_API_KEY';
-const {URLS, MESSAGES} = require('../config/constants');
+const {getAPIKey} = require('../core/helpers');
+const {API, URLS, MESSAGES} = require('../config/constants');
+
+const API_KEY = getAPIKey(API.GOOGLE_PLACES);
 
 /**
  * Model for the City Image. It gets a image in Google Places API using the API_KEY stored in api.json config.
