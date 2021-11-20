@@ -6,7 +6,8 @@
   "scripts": {
     "sync": "browser-sync start --directory --server --files '*.js, *.html, *.css'",
     "wp:dev": "webpack --mode development --progress --watch && rimraf dist",
-    "wp:prod": "webpack --mode production && rimraf dist"
+    "wp:prod": "webpack --mode production && rimraf dist",
+    "start": "node app/app.js"
   },
   "repository": {
     "type": "git",
