@@ -19,4 +19,4 @@ app.get('/:city', (request, response) => {
     forecastRoute.route(request, response);
 });
 
-app.listen(8080);
+app.listen(process.env.PORT || 8080);
