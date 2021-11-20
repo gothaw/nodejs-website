@@ -1,5 +1,11 @@
 const {API} = require('../config/constants');
 
+/**
+ * Returns API Key. If in production, it uses API keys stored in environment variables.
+ * Otherwise it uses api keys stored in ./app/config/api.json
+ * @param api {String} API key name from constants.js
+ * @returns {String} API key
+ */
 const getAPIKey = api => {
     if (process.env.NODE_ENV === 'production') {
         switch (api) {
