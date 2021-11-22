@@ -4,14 +4,27 @@
 @import 'partials/_utilities';
 
 //========================================== Main Styling ================================================
+* {
+  box-sizing: border-box;
+}
+
+img {
+  display: block;
+}
+
 body {
   background: $background-color;
   text-align: center;
-  margin: 100px auto;
-  max-width: 462px;
-  padding: 0 40px;
+  margin: 50px auto;
+  max-width: 460px;
+  padding: 0 20px;
   font: $default-size 'Varela Round', 'Helvetica', serif;
   color: $text-color;
+  // Desktop and Tablet
+  @media only screen and (min-width: 768px) {
+    margin: 100px auto;
+    padding: 0 40px;
+  }
 }
 
 ul {
@@ -50,18 +63,41 @@ input {
   color: $input-text-color;
 }
 
-.search-icon, .city-image {
+.search-icon {
   border-radius: 50%;
+  width: 250px;
+  height: 250px;
+  margin: 0 auto;
+}
+
+.city-image {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 280px;
+  max-height: 280px;
+  border-radius: 50%;
+  object-fit: cover;
+  // Desktop and Tablet
+  @media only screen and (min-width: 768px) {
+    max-height: 300px;
+    max-width: 300px;
+  }
+}
+
+.city-image-wrapper {
+  padding: 0 20px;
+  width: 100%;
   margin: 0 auto;
 }
 
 .city-name-search {
   margin: 20px 0 0;
+  width: 100%;
 }
 
 .city-name {
   font-size: 24px;
-  padding: 20px 0;
+  padding: 40px 0 20px;
 }
 
 .country, .local-time {
@@ -73,6 +109,7 @@ input {
   background: $light-blue;
   color: $white;
   cursor: pointer;
+  width: 100%;
 }
 
 .error {
@@ -86,9 +123,14 @@ input {
 }
 
 .forecast {
+  width: 100%;
   background: $white;
   border-radius: 4px;
   border: 1px solid $light-grey;
   padding: 40px 0 0;
-  margin: -40px 0 0;
+  margin: -20px 0 0;
+  // Desktop and Tablet
+  @media only screen and (min-width: 768px) {
+    margin: -40px 0 0;
+  }
 }
