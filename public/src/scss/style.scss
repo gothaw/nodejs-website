@@ -74,11 +74,13 @@ input {
   margin: 0 auto;
   width: 100%;
   max-width: 280px;
+  height: 280px;
   max-height: 280px;
   border-radius: 50%;
   object-fit: cover;
   // Desktop and Tablet
   @media only screen and (min-width: 768px) {
+    height: 300px;
     max-height: 300px;
     max-width: 300px;
   }
