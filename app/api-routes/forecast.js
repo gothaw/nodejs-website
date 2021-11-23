@@ -63,6 +63,11 @@ const route = (request, response) => {
 
 };
 
+/**
+ * Renders forecast and footer HTML files using renderer.
+ * @param values {Object} includes values to be added to the template
+ * @param response {Object} server response object
+ */
 const renderForecast = (values, response) => {
     renderer.view('forecast', values, response);
     renderer.view('footer', {}, response);
