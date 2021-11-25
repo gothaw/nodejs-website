@@ -49,6 +49,8 @@ class Request extends EventEmitter {
                     } else {
                         this.emit('end', this._data);
                     }
+                } else {
+                    this.emit('error', new Error(`${failedRequestErrorMessage}: (${http.STATUS_CODES[response.statusCode]})`));
                 }
             });
         }).on('error', error => this.emit('error', error));
