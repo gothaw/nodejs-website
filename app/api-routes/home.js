@@ -1,4 +1,5 @@
 const querystring = require('querystring');
+const accents = require('remove-accents');
 
 const constants = require('../config/constants');
 const renderer = require('../core/renderer');
@@ -25,7 +26,7 @@ const handleGetRequest = response => {
  */
 const handlePostRequest = (request, response) => {
     request.on('data', postBody => {
-        const query = querystring.parse(postBody.toString());
+        const query = querystring.parse(accents.remove(postBody.toString()));
         response.writeHead(303, {'Location': `/${query.cityName.toLowerCase()}`});
         response.end();
     })

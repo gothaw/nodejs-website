@@ -35,6 +35,7 @@
     "webpack-fix-style-only-entries": "^0.6.1"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "remove-accents": "^0.4.2"
   }
 }
