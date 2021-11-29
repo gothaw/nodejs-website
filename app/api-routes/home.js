@@ -26,8 +26,8 @@ const handleGetRequest = response => {
  */
 const handlePostRequest = (request, response) => {
     request.on('data', postBody => {
-        const query = querystring.parse(accents.remove(postBody.toString()));
-        response.writeHead(303, {'Location': `/${query.cityName.toLowerCase()}`});
+        const query = querystring.parse(postBody.toString());
+        response.writeHead(303, {'Location': `/${accents.remove(query.cityName.toLowerCase())}`});
         response.end();
     })
 };
