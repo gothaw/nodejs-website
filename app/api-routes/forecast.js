@@ -2,6 +2,7 @@ const constants = require('../config/constants');
 const renderer = require('../core/renderer');
 const Forecast = require('../services/Forecast');
 const CityImage = require('../services/CityImage');
+const {API} = require('../config/config');
 
 const {COMMON_HEADERS} = constants;
 
@@ -36,21 +37,26 @@ const route = (request, response) => {
                 wind: current?.wind_kph
             };
 
-            const cityImage = new CityImage(cityName);
+            if (API.GOOGLE_API_ENABLED) {
+                const cityImage = new CityImage(cityName);
 
-            cityImage.on('end', imageURL => {
-                values.cityImage = imageURL
+                cityImage.on('end', imageURL => {
+                    values.cityImage = imageURL
 
-                renderForecast(values, response);
-                response.end();
-            })
+                    renderForecast(values, response);
+                    response.end();
+                })
 
-            cityImage.on('error', () => {
+                cityImage.on('error', () => {
+                    values.cityImage = './dist/img/city.png';
+
+                    renderForecast(values, response);
+                    response.end();
+                });
+            } else {
                 values.cityImage = './dist/img/city.png';
-
                 renderForecast(values, response);
-                response.end();
-            });
+            }
         });
 
         forecast.on('error', error => {

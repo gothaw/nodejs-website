@@ -23,7 +23,6 @@ const URLS = {
     GOOGLE_PLACES_PHOTO: 'https://maps.googleapis.com/maps/api/place/photo'
 }
 
-
 module.exports = {
     API,
     COMMON_HEADERS,

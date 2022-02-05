@@ -12,6 +12,7 @@ To run the app in local environment create the free counts for both Google Place
 "PLACES_API_KEY": "YOUR_API_KEY_FOR_GOOGLE_PLACES_API"
 }
 ```
+In addition enable google api in config.js.
 
 ### Available Scripts
 
