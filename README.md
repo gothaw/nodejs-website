@@ -36,6 +36,8 @@ It creates `main.css` file and updates it in development mode if changes are mad
 Deployment has been carried out using [heroku](https://heroku.com).
 To deploy the app install heroku and follow the latest documentation available [here](https://devcenter.heroku.com/articles/git).
 
+Please note that the deployed build has Google API disabled as this was using trial version that is bound to expire in the future. 
+
 ### Built with
 
 HTML5, SCSS, JavaScript, Node.js

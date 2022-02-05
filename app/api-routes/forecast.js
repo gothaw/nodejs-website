@@ -42,21 +42,16 @@ const route = (request, response) => {
 
                 cityImage.on('end', imageURL => {
                     values.cityImage = imageURL
-
-                    renderForecast(values, response);
-                    response.end();
                 })
 
                 cityImage.on('error', () => {
                     values.cityImage = './dist/img/city.png';
-
-                    renderForecast(values, response);
-                    response.end();
                 });
             } else {
                 values.cityImage = './dist/img/city.png';
-                renderForecast(values, response);
             }
+            renderForecast(values, response);
+            response.end();
         });
 
         forecast.on('error', error => {
