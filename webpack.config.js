@@ -3,14 +3,12 @@ const mode = process.env.NODE_ENV || 'development';
 const webpack = require("webpack");
 const autoprefixer = require("autoprefixer");
 const TerserPlugin = require('terser-webpack-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries");
 
 const optimization = {
     minimizer: [
-        new TerserPlugin(),
-        new OptimizeCSSAssetsPlugin({})
+        new TerserPlugin()
     ]
 };
 
