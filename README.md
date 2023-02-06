@@ -36,6 +36,8 @@ It creates `main.css` file and updates it in development mode if changes are mad
 Deployment has been carried out using [heroku](https://heroku.com).
 To deploy the app install heroku and follow the latest documentation available [here](https://devcenter.heroku.com/articles/git).
 
+Remember to add `WEATHER_API_KEY` and `PLACES_API_KEY` in Settings -> Config Vars.
+
 Please note that the deployed build has Google API disabled as this was using trial version that is bound to expire in the future. 
 
 ### Built with
